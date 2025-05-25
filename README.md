@@ -50,7 +50,7 @@ docker compose build
 
 - 정상 빌드시 로그에 ` ✔ Service figma-mcp  Built` 출력됨
 
-1. 컨테이너 백그라운드 실행
+2. 컨테이너 백그라운드 실행
 
 ```bash
 docker compose up -d
@@ -63,7 +63,7 @@ docker compose up -d
   ✔ Container figma-mcp-server        Started
   ```  
 
-1. 컨테이너 상태 확인
+3. 컨테이너 상태 확인
 
 ```bash
 docker compose ps
@@ -84,7 +84,7 @@ docker compose ps
 docker build -t figma-mcp .
 ```
 
-1. `.env` 파일에서 환경 변수 로드하여 실행
+2-1. `.env` 파일에서 환경 변수 로드하여 실행
 
 ```bash
 docker run -d --name figma-mcp-server \
@@ -92,7 +92,7 @@ docker run -d --name figma-mcp-server \
   -it figma-mcp
 ```
 
-1. 또는 직접 환경 변수 지정
+2-2. 또는 직접 환경 변수 지정
 
 ```bash
 docker run -d --name figma-mcp-server \
@@ -120,7 +120,7 @@ docker run -d --name figma-mcp-server \
 }
 ```
 
-이후 GitHub Copilot Chat의 Agent 모드에서 MCP 연동 후 작업
+2. GitHub Copilot Chat의 Agent 모드에서 MCP 연동 후 작업
 
 ## 5. 문제 해결
 
