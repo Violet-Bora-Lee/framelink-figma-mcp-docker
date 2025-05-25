@@ -2,7 +2,13 @@
 
 - [Framelink Figma MCP](https://github.com/GLips/Figma-Context-MCP)를 Docker를 사용하여 실행하고, VS Code와 연동하는 방법을 설명합니다.
 
-## 1. 폴더 구조
+## 저장소 클론
+
+```bash
+git clone https://github.com/Violet-Bora-Lee/framelink-figma-mcp-docker.git
+```
+
+- 폴더 구조
 
 ```plaintext
 figma-mcp-docker/
@@ -16,31 +22,37 @@ figma-mcp-docker/
 
 ### 환경 변수 설정
 
-```bash
-# .env.example을 .env로 복사
-cp .env.example .env
+1. .env.example을 .env로 복사
 
-# .env 파일에서 실제 Figma API 키 입력
-# FIGMA_API_KEY=figd_your_actual_api_key_here
+```bash
+cp .env.example .env
+```
+
+2. .env 파일에서 실제 Figma API 키 입력
+
+```plaintext
+FIGMA_API_KEY=이곳에피그마개인키입력
 ```
 
 ### Docker 이미지 빌드 및 실행
 
 > 사전 준비사항: Docker Desktop 실행
 
-- 링크: https://www.docker.com/products/docker-desktop/
+- 다운로드 링크: https://www.docker.com/products/docker-desktop/
 
 #### Docker Compose V2를 사용하는 경우 (권장)
 
+1. Docker 이미지 빌드
+
 ```bash
-# Docker 이미지 빌드
 docker compose build
 ```
 
 - 정상 빌드시 로그에 ` ✔ Service figma-mcp  Built` 출력됨
 
+1. 컨테이너 백그라운드 실행
+
 ```bash
-# 컨테이너 백그라운드 실행
 docker compose up -d
 ```
 
@@ -51,8 +63,9 @@ docker compose up -d
   ✔ Container figma-mcp-server        Started
   ```  
 
+1. 컨테이너 상태 확인
+
 ```bash
-# 컨테이너 상태 확인
 docker compose ps
 ```
 
@@ -65,16 +78,23 @@ docker compose ps
 
 #### Docker Compose가 없는 경우(직접 실행)
 
-```bash
-# Docker 이미지 빌드
-docker build -t figma-mcp .
+1. Docker 이미지 빌드
 
-# .env 파일에서 환경 변수 로드하여 실행
+```bash
+docker build -t figma-mcp .
+```
+
+1. `.env` 파일에서 환경 변수 로드하여 실행
+
+```bash
 docker run -d --name figma-mcp-server \
   --env-file .env \
   -it figma-mcp
+```
 
-# 또는 직접 환경 변수 지정 (보안상 비권장!)
+1. 또는 직접 환경 변수 지정
+
+```bash
 docker run -d --name figma-mcp-server \
   -e FIGMA_API_KEY="your_figma_api_key_here" \
   -it figma-mcp
@@ -82,7 +102,7 @@ docker run -d --name figma-mcp-server \
 
 ## 3. VSCode 설정
 
-VSCode의 `settings.json`에 다음을 추가:
+1. VSCode의 `settings.json`이나 워크스페이스의 `mcp.json`에 다음을 추가
 
 ```json
 {
@@ -101,68 +121,6 @@ VSCode의 `settings.json`에 다음을 추가:
 ```
 
 이후 GitHub Copilot Chat의 Agent 모드에서 MCP 연동 후 작업
-
-## 4. 대안 접근법
-
-### 방법 1: 미리 컨테이너를 실행해두고 VSCode에서 연결
-
-```bash
-# 1단계: 백그라운드에서 컨테이너 실행 (키를 미리 설정)
-docker run -d --name figma-mcp-server \
-  -e FIGMA_API_KEY="your_figma_api_key" \
-  -it figma-mcp:latest
-```
-
-```json
-// 2단계: 저장소(workspace)가 아닌 VS Code의 전체 설정을 관장하는 파일인 settings.json을 수정해 이미 실행 중인 컨테이너에 연결
-{
-    "servers": {
-        "Framelink Figma MCP (Docker)": {
-            "command": "docker",
-            "args": [
-                "exec",
-                "-i",
-                "figma-mcp-server",
-                "/app/start.sh"
-            ]
-        }
-    }
-}
-```
-
-### 방법 2: VSCode에서 매번 새 컨테이너 실행 (키 입력)
-
-```json
-// VSCode에서 실행할 때마다 키를 입력받아 새 컨테이너 생성
-{
-    "inputs": [
-        {
-            "type": "promptString",
-            "id": "figma-key",
-            "description": "Figma API Key를 입력하세요",
-            "password": true
-        }
-    ],
-    "mcpServers": {
-        "Framelink Figma MCP (Docker)": {
-            "command": "docker",
-            "args": [
-                "run",
-                "--rm",
-                "-i",
-                "-e",
-                "FIGMA_API_KEY=${input:figma-key}",
-                "figma-mcp:latest"
-            ]
-        }
-    }
-}
-```
-
-**방법별 특징:**
-
-- **방법 1**: 컨테이너를 한 번 실행하고 계속 사용 (효율적, 키 노출 최소화)
-- **방법 2**: 매번 새 컨테이너 실행 (격리성 좋음, 키를 매번 입력)
 
 ## 5. 문제 해결
 
