@@ -34,14 +34,17 @@ cp .env.example .env
 # Docker 이미지 빌드
 docker compose build
 ```
+
 - 정상 빌드시 로그에 ` ✔ Service figma-mcp  Built` 출력됨
 
 ```bash
 # 컨테이너 백그라운드 실행
 docker compose up -d
 ```
+
 - 정상 실행시 로그에 다음과 같은 내용 출력됨
-  ```
+
+  ```plaintext
   ✔ Network figma-mcp-docker_default  Created 
   ✔ Container figma-mcp-server        Started
   ```  
@@ -50,8 +53,10 @@ docker compose up -d
 # 컨테이너 상태 확인
 docker compose ps
 ```
+
 - 정상 동작중이면 로그에 다음과 같은 내용 출력됨
-  ```
+
+  ```plaintext
   NAME               IMAGE                        COMMAND                   SERVICE     CREATED         STATUS         PORTS
   figma-mcp-server   figma-mcp-docker-figma-mcp   "docker-entrypoint.s…"   figma-mcp   2 minutes ago   Up 2 minutes   
   ```
@@ -158,6 +163,7 @@ docker run -d --name figma-mcp-server \
 ## 5. 문제 해결
 
 ### 컨테이너 로그 확인
+
 ```bash
 # Docker Compose V2
 docker compose logs figma-mcp
@@ -167,11 +173,13 @@ docker logs figma-mcp-server
 ```
 
 ### 컨테이너 내부 접속
+
 ```bash
 docker exec -it figma-mcp-server sh
 ```
 
 ### API 키 확인
+
 ```bash
 docker exec figma-mcp-server env | grep FIGMA
 ```
@@ -187,6 +195,7 @@ docker exec figma-mcp-server env | grep FIGMA
 ### API 키 보안 추가 팁
 
 **History 노출 방지:**
+
 ```bash
 # 1. 명령어 앞에 공백을 넣으면 일부 쉘에서 history에 저장되지 않음
  docker run -e FIGMA_API_KEY="your_key" figma-mcp
