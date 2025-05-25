@@ -98,6 +98,8 @@ VSCode의 `settings.json`에 다음을 추가:
 }
 ```
 
+이후 GitHub Copilot Chat의 Agent 모드에서 MCP 연동 후 작업
+
 ## 4. 대안 접근법
 
 ### 방법 1: 미리 컨테이너를 실행해두고 VSCode에서 연결
