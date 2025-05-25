@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  figma-mcp:
+    build: .
+    container_name: figma-mcp-server
+    environment:
+      - FIGMA_API_KEY=${FIGMA_API_KEY}
+    stdin_open: true
+    tty: true
+    # MCP는 stdio를 사용하므로 포트 매핑은 필요 없음
+    restart: unless-stopped
+    volumes:
+      # 필요시 로그나 설정 파일을 위한 볼륨 마운트
+      - ./logs:/app/logs:rw

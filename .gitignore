@@ -1,0 +1,32 @@
+# environment variables
+.env
+
+# Docker related
+.docker/
+docker-compose.override.yml
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+*.pid
+*.seed
+*.pid.lock
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Node.js
+node_modules/
+npm-debug.log*
+
+
+# IDE
+.idea/
+*.swp
+*.swo
+
+# VS Code
+.vscode/
