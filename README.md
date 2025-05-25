@@ -217,3 +217,9 @@ set -o history
 - 환경 변수 파일(`.env`) 사용이 가장 권장됨
 - 키 관리 도구 사용 (AWS Secrets Manager, HashiCorp Vault 등)
 - Docker secrets 활용 (Docker Swarm 환경)
+
+## Docker를 사용한 MCP의 장점
+
+- VS Code 내에서 MCP를 실행하는것보다 Docker를 사용해 MCP를 띄운 후 연동하는게 나은 이유
+  - Docker Desktop의 대시보드를 통해 컨테이너의 CPU, 메모리 사용량, 네트워크 I/O, 디스크 R/W 등의 리소스를 실시간으로 모니터링할 수 있어 MCP 서버의 상태를 파악하고 문제를 진단하는 데 용이함
+    ![alt text](image.png)
