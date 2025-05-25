@@ -222,4 +222,4 @@ set -o history
 
 - VS Code 내에서 MCP를 실행하는것보다 Docker를 사용해 MCP를 띄운 후 연동하는게 나은 이유
   - Docker Desktop의 대시보드를 통해 컨테이너의 CPU, 메모리 사용량, 네트워크 I/O, 디스크 R/W 등의 리소스를 실시간으로 모니터링할 수 있어 MCP 서버의 상태를 파악하고 문제를 진단하는 데 용이함
-    ![alt text](image.png)
+    ![Container_Stats_Capture](image.png)
