@@ -1,5 +1,7 @@
 # Docker로 Figma MCP 설정하기
 
+- [Framelink Figma MCP](https://github.com/GLips/Figma-Context-MCP)를 Docker를 사용하여 실행하고, VS Code와 연동하는 방법을 설명합니다.
+
 ## 1. 폴더 구조
 
 ```plaintext
