@@ -10,115 +10,124 @@ git clone https://github.com/Violet-Bora-Lee/framelink-figma-mcp-docker.git
 
 - 폴더 구조
 
-```plaintext
-figma-mcp-docker/
-├── Dockerfile
-├── docker-compose.yml
-├── .env.example
-└── .env
-```
+  ```plaintext
+  figma-mcp-docker/
+  ├── Dockerfile
+  ├── docker-compose.yml
+  ├── .env.example
+  └── .env
+  ```
 
 ## 2. 설정 단계
 
 ### 환경 변수 설정
 
-1. .env.example을 .env로 복사
+1. `.env.example`을 `.env`로 복사
 
-```bash
-cp .env.example .env
-```
+    ```bash
+    cp .env.example .env
+    ```
 
-2. .env 파일에서 실제 Figma API 키 입력
+2. `.env` 파일에 실제 Figma API 키 입력
 
-```plaintext
-FIGMA_API_KEY=이곳에피그마개인키입력
-```
+    ```plaintext
+    FIGMA_API_KEY=이곳에피그마개인키입력
+    ```
 
 ### Docker 이미지 빌드 및 실행
 
 > 사전 준비사항: Docker Desktop 실행
 
-- 다운로드 링크: https://www.docker.com/products/docker-desktop/
+   - 다운로드 링크: https://www.docker.com/products/docker-desktop/
 
 #### Docker Compose V2를 사용하는 경우 (권장)
 
 1. Docker 이미지 빌드
 
-```bash
-docker compose build
-```
+    ```bash
+    docker compose build
+    ```
 
-- 정상 빌드시 로그에 ` ✔ Service figma-mcp  Built` 출력됨
+      - 정상 빌드시 로그에 ` ✔ Service figma-mcp  Built` 출력됨
 
 2. 컨테이너 백그라운드 실행
 
-```bash
-docker compose up -d
-```
+    ```bash
+    docker compose up -d
+    ```
 
-- 정상 실행시 로그에 다음과 같은 내용 출력됨
+      - 정상 실행시 로그에 다음과 같은 내용 출력됨
 
-  ```plaintext
-  ✔ Network figma-mcp-docker_default  Created 
-  ✔ Container figma-mcp-server        Started
-  ```  
+        ```plaintext
+        ✔ Network figma-mcp-docker_default  Created 
+        ✔ Container figma-mcp-server        Started
+        ```  
 
-3. 컨테이너 상태 확인
+1. 컨테이너 상태 확인
 
-```bash
-docker compose ps
-```
+    3-1. 명령어로 확인
 
-- 정상 동작중이면 로그에 다음과 같은 내용 출력됨
+    ```bash
+    docker compose ps
+    ```
 
-  ```plaintext
-  NAME               IMAGE                        COMMAND                   SERVICE     CREATED         STATUS         PORTS
-  figma-mcp-server   figma-mcp-docker-figma-mcp   "docker-entrypoint.s…"   figma-mcp   2 minutes ago   Up 2 minutes   
-  ```
+    - 정상 동작중이면 로그에 다음과 같은 내용 출력됨
+
+      ```plaintext
+      NAME               IMAGE                        COMMAND                   SERVICE     CREATED         STATUS         PORTS
+      figma-mcp-server   figma-mcp-docker-figma-mcp   "docker-entrypoint.s…"   figma-mcp   2 minutes ago   Up 2 minutes   
+      ```
+
+    3-2. Docker Desktop에서 확인
+
+    - Containers 메뉴에서 `figma-mcp-docker` 컨테이너가 실행 중임을 확인
+        ![Container_Running](figma-mcp-docker-container-running.png)
 
 #### Docker Compose가 없는 경우(직접 실행)
 
 1. Docker 이미지 빌드
 
-```bash
-docker build -t figma-mcp .
-```
+    ```bash
+    docker build -t figma-mcp .
+    ```
 
-2-1. `.env` 파일에서 환경 변수 로드하여 실행
+2. 컨테이너 실행
 
-```bash
-docker run -d --name figma-mcp-server \
-  --env-file .env \
-  -it figma-mcp
-```
+    2-1. (옵션1) `.env` 파일에서 환경 변수 로드하여 실행
 
-2-2. 또는 직접 환경 변수 지정
+    ```bash
+    docker run -d --name figma-mcp-server \
+      --env-file .env \
+      -it figma-mcp
+    ```
 
-```bash
-docker run -d --name figma-mcp-server \
-  -e FIGMA_API_KEY="your_figma_api_key_here" \
-  -it figma-mcp
-```
+    2-2. (옵션2) 직접 환경 변수 지정
+
+    ```bash
+    docker run -d --name figma-mcp-server \
+      -e FIGMA_API_KEY="your_figma_api_key_here" \
+      -it figma-mcp
+    ```
 
 ## 3. VSCode 설정
 
 1. VSCode의 `settings.json`이나 워크스페이스의 `mcp.json`에 다음을 추가
 
-```json
-{
-    "servers": {
-        "Framelink Figma MCP (Docker)": {
-            "command": "docker",
-            "args": [
-                "exec",
-                "-i",
-                "figma-mcp-server",
-                "/app/start.sh"
-            ]
+    ```json
+    {
+        "servers": {
+            "Framelink Figma MCP (Docker)": {
+                "command": "docker",
+                "args": [
+                    "exec",
+                    "-i",
+                    "figma-mcp-server",
+                    "/app/start.sh"
+                ]
+            }
         }
     }
-}
-```
+    ```
 
 2. GitHub Copilot Chat의 Agent 모드에서 MCP 연동 후 작업
 
