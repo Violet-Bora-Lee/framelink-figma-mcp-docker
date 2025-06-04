@@ -1,6 +1,6 @@
 !!!
 
-피그마 팀이 공식 Dev Mode MCP Server를 지원합니다(2025년 6월 5일 기준 오픈베타). 
+피그마 팀이 공식 [Dev Mode MCP Server](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server)를 지원합니다(2025년 6월 5일 기준 오픈베타). 
 키 발급, 외부 API 통신 없이, 피그마 데스크탑과 연동하면 마크업 작업이 가능합니다(`http://127.0.0.1:3845/sse`).
 사용 방법은 곧 작성하여 링크 달아두겠습니다.
 
