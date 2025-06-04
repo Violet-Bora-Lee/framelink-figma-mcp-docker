@@ -1,3 +1,11 @@
+!!!
+
+피그마 팀이 공식 Dev Mode MCP Server를 지원합니다(2025년 6월 5일 기준 오픈베타). 
+키 발급, 외부 API 통신 없이, 피그마 데스크탑과 연동하면 마크업 작업이 가능합니다(`http://127.0.0.1:3845/sse`).
+사용 방법은 곧 작성하여 링크 달아두겠습니다.
+
+!!!
+
 # Docker로 Figma MCP 설정하기
 
 - [Framelink Figma MCP](https://github.com/GLips/Figma-Context-MCP)를 Docker를 사용하여 실행하고, VS Code와 연동하는 방법을 설명합니다.
